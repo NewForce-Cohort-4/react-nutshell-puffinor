@@ -15,13 +15,6 @@ export default class ApplicationViews extends Component {
         />
 
         <Route
-          exact path="/register" render={props => {
-            return null
-            // Remove null and return the component which will handle user registration
-          }}
-        />
-
-        <Route
           path="/friends" render={props => {
             return null
             // Remove null and return the component which will show list of friends
