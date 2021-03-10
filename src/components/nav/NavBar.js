@@ -27,7 +27,7 @@ class NavBar extends Component {
                 <span className="navbar-text">
                     <ul className="nav nav-pills nav-fill">
                         <li className="nav-item">
-                            <Link className="nav-link" to="/register">Register</Link>
+                            <Link className="nav-link" to="/logout">Log Out</Link>
                         </li>
                     </ul>
                 </span>
