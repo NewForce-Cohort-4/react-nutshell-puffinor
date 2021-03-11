@@ -3,6 +3,10 @@ import React, { Component } from "react";
 import { TaskProvider } from "./tasks/TaskDataProvider"
 import { TaskList } from "./tasks/TaskList"
 
+import { MessageProvider } from "./messages/MessageProvider"
+import { MessageList } from "./messages/MessageList"
+
+
 export default class ApplicationViews extends Component {
 
   render() {
@@ -15,21 +19,19 @@ export default class ApplicationViews extends Component {
             // Remove null and return the component which will show news articles
           }}
         />
-
         <Route
           path="/friends" render={props => {
             return null
             // Remove null and return the component which will show list of friends
           }}
         />
+        {/* //Run this when address is /messages */}
+        <MessageProvider>
+                <Route exact path="/messages">
+                    <MessageList />
+                </Route>
+        </MessageProvider>
 
-        <Route
-          path="/messages" render={props => {
-            return null
-            // Remove null and return the component which will show the messages
-          }}
-        />
-        <TaskProvider>
         <Route
           path="/tasks" render={props => {
             return <TaskList />
