@@ -6,7 +6,7 @@ export const ArticleProvider = (props) => {
     const [article, setArticles] = useState([])
 
     const getArticles = () => {
-        return fetch("http://localhost:8088/articles?_expand=user")
+        return fetch("http://localhost:8088/articles")
         .then(res => res.json())
         .then(setArticles)
     }

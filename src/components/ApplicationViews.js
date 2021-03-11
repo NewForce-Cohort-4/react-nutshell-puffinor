@@ -3,7 +3,6 @@ import React, { Component } from "react";
 import { ArticleProvider } from "./articles/ArticlesProvider"
 import { ArticleList } from "./articles/ArticleList"
 import { ArticleForm } from "./articles/ArticlesForm"
-import { ArticleDetail } from "./articles/ArticlesDetails"
 
 export default class ApplicationViews extends Component {
 
@@ -14,12 +13,6 @@ export default class ApplicationViews extends Component {
         <ArticleProvider>
           <Route  path ="/articles">
             <ArticleList />
-          </Route>
-          <Route exact path="/articles/create">
-            <ArticleForm />
-          </Route>
-          <Route exact path="/articles/detail/:articleId(\d+)">
-            <ArticleDetail />
           </Route>
         </ArticleProvider>
         {/* // Remove null and return the component which will show news articles */}

@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useState } from "react"
 import { ArticleContext } from './ArticlesProvider'
 import { useParams, useHistory } from "react-router-dom"
+import { changeState } from "./ArticleList"
 import "./Article.css"
 
 export const ArticleForm = () => {
-    const { addArticle, getArticleById, updateArticle } = useContext(ArticleContext)
+    const { addArticle, updateArticle, getArticles } = useContext(ArticleContext)
 
     const [article, setArticles] = useState({})
     const [isLoading, setIsLoading] = useState(true)
@@ -20,22 +21,28 @@ export const ArticleForm = () => {
     }
 
     const handleSaveArticle = () => {
+        let currentUser = localStorage.getItem("nutshell_user")
+        console.log(currentUser)
         setIsLoading(true);
         if (articleId) {
             updateArticle({
                 id: article.id,
                 title: article.title,
                 synopsis: article.synopsis,
-                url: article.url
+                url: article.url,
+                userId: currentUser
             })
                 .then(() => history.push(`/articles/detail/${article.id}`))
         } else {
             addArticle({
                 title: article.title,
                 synopsis: article.synopsis,
-                url: article.url
+                url: article.url,
+                userId: currentUser
             })
-                .then(() => history.push("/articles"))
+                .then(() => {
+                    getArticles()
+            })   
         }
     }
 
@@ -70,7 +77,7 @@ export const ArticleForm = () => {
                 </div>
             </fieldset>
             <button className="btn btn-primary"
-                disabled={isLoading}
+                // disabled={isLoading}
                 onClick={event => {
                     event.preventDefault()
                     handleSaveArticle()
