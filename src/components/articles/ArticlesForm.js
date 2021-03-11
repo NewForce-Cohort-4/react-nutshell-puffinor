@@ -1,10 +1,9 @@
 import React, { useContext, useEffect, useState } from "react"
 import { ArticleContext } from './ArticlesProvider'
 import { useParams, useHistory } from "react-router-dom"
-import { changeState } from "./ArticleList"
 import "./Article.css"
 
-export const ArticleForm = () => {
+export const ArticleForm = ({setShowForm}) => {
     const { addArticle, updateArticle, getArticles } = useContext(ArticleContext)
 
     const [article, setArticles] = useState({})
@@ -41,6 +40,7 @@ export const ArticleForm = () => {
                 userId: currentUser
             })
                 .then(() => {
+                    setShowForm()
                     getArticles()
             })   
         }
