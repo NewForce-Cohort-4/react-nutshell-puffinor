@@ -1,6 +1,10 @@
 import { Route } from "react-router-dom";
 import React, { Component } from "react";
 
+import { MessageProvider } from "./messages/MessageProvider"
+import { MessageList } from "./messages/MessageList"
+
+
 export default class ApplicationViews extends Component {
 
   render() {
@@ -13,20 +17,18 @@ export default class ApplicationViews extends Component {
             // Remove null and return the component which will show news articles
           }}
         />
-
         <Route
           path="/friends" render={props => {
             return null
             // Remove null and return the component which will show list of friends
           }}
         />
-
-        <Route
-          path="/messages" render={props => {
-            return null
-            // Remove null and return the component which will show the messages
-          }}
-        />
+        {/* //Run this when address is /messages */}
+        <MessageProvider>
+                <Route exact path="/messages">
+                    <MessageList />
+                </Route>
+        </MessageProvider>
 
         <Route
           path="/tasks" render={props => {
