@@ -1,5 +1,7 @@
 import { Route } from "react-router-dom";
 import React, { Component } from "react";
+import { TaskProvider } from "./tasks/TaskDataProvider"
+import { TaskList } from "./tasks/TaskList"
 
 export default class ApplicationViews extends Component {
 
@@ -27,13 +29,13 @@ export default class ApplicationViews extends Component {
             // Remove null and return the component which will show the messages
           }}
         />
-
+        <TaskProvider>
         <Route
           path="/tasks" render={props => {
-            return null
-            // Remove null and return the component which will show the user's tasks
+            return <TaskList />
           }}
         />
+        </TaskProvider>
 
         <Route
           path="/events" render={props => {
