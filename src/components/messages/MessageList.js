@@ -14,7 +14,7 @@ export const MessageList = () => {
   
 
   //this is independant (not afiliated with messages variable in provider)
-  const [message, setMessage] = useState({})
+  const [message, setMessage] = useState({message:""})
     //isLoading is nothing but a boolean. setIsLoading is a fx or method that is assigned to adjust isLoading as needed
     //const [isLoading, setIsLoading] = useState(true)
   
@@ -39,6 +39,7 @@ export const MessageList = () => {
         time:new Date().toLocaleTimeString()
     }).then(() => {
         fieldRef.current.scrollIntoView();
+        setMessage({message:""})
         // expected output: "Success!"
       });
     }
@@ -67,7 +68,7 @@ export const MessageList = () => {
             </div>
             <Container fluid >
                 <div className="input-group">
-                <textarea type="text" id="message"  required autoFocus className="form-control" onChange={handleControlledInputChange}placeholder="message.." /> 
+                <textarea type="text" id="message" value={message.message} required autoFocus className="form-control" onChange={handleControlledInputChange}placeholder="message.." /> 
                 <button 
                         onClick={event => {event.preventDefault()
                         handleClickSaveMessage()
