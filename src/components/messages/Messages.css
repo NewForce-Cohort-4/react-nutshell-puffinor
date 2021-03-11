@@ -1,0 +1,18 @@
+
+
+.messages-container{
+    height: 80vh;
+    overflow: auto;
+     
+}
+
+.input-group{
+    position: absolute;
+    bottom: 0;
+    width: 95vw;
+
+}
+
+.container-card{
+    width:100vw;
+}
