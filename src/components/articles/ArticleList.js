@@ -6,14 +6,15 @@ import "./Article.css"
 import { useHistory } from "react-router-dom"
 
 export const ArticleList = () => {
-    const { article, getArticles } = useContext(ArticleContext)
+    const { article, getArticles, deleteArticle } = useContext(ArticleContext)
     let [showForm, setShowForm] = useState(false)
 
+// listening function when New Article button is clicked to make it appear
     const handleClick = () => {
         const newArticle = showForm
         setShowForm(true)
     }
-
+//makes the button hidden after you fill out the form 
      const changeState = () => {
         setShowForm(false)
     }
@@ -24,6 +25,12 @@ export const ArticleList = () => {
         getArticles()
     }, [])
 
+    //function that handles the delete button
+    const handleDelete = (articleId) => {
+        return () => deleteArticle(articleId).then(() => 
+        history.push("/articles"))
+    }
+
     return (
         <>
         <h2>Articles</h2>
@@ -31,17 +38,19 @@ export const ArticleList = () => {
             New Article
         </button>
         {
+            //making form appear then disapper after entering info 
             showForm ?
                 <ArticleForm  setShowForm={changeState}/>
             : ""
         }
         
         <div className="articles">
-            {article.map((singleArticleInLoop) => {
+            {article.map((article) => {
                 return (
                     <ArticleCard
-                    key={singleArticleInLoop.id}
-                    article={singleArticleInLoop}
+                    key={article.id}
+                    article={article}
+                    deleteArticle={handleDelete(article.id)}
                     />);
             })}
         </div>

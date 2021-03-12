@@ -6,39 +6,46 @@ import "./Article.css"
 export const ArticleForm = ({setShowForm}) => {
     const { addArticle, updateArticle, getArticles } = useContext(ArticleContext)
 
-    const [article, setArticles] = useState({})
+    //Info for a new article
+    const [article, setArticles] = useState({
+        title: "",
+        synopsis: "",
+        url: "",
+        time: parseInt(Date.now()),
+        userId: localStorage.getItem("nutshell_user")
+    })
     const [isLoading, setIsLoading] = useState(true)
 
     const { articleId } = useParams()
     const history = useHistory()
 
+    // function for data is entered in text feilds 
     const handleControlledInputChange = (event) => {
         const newArticle = { ...article }
 
         newArticle[event.target.name] = event.target.value
         setArticles(newArticle)
     }
-
+// fucntion when you hit save / update an article 
     const handleSaveArticle = () => {
         let currentUser = localStorage.getItem("nutshell_user")
-        console.log(currentUser)
         setIsLoading(true);
         if (articleId) {
+            //update a current article 
             updateArticle({
                 id: article.id,
                 title: article.title,
                 synopsis: article.synopsis,
                 url: article.url,
+                time: parseInt(Date.now()),
                 userId: currentUser
             })
-                .then(() => history.push(`/articles/detail/${article.id}`))
+                .then(() => {
+                getArticles()
+                })
         } else {
-            addArticle({
-                title: article.title,
-                synopsis: article.synopsis,
-                url: article.url,
-                userId: currentUser
-            })
+            // create a new article 
+            addArticle(article)
                 .then(() => {
                     setShowForm()
                     getArticles()
@@ -82,7 +89,7 @@ export const ArticleForm = ({setShowForm}) => {
                     event.preventDefault()
                     handleSaveArticle()
                 }}>
-                {articleId ? <>Save Article</> : <>Add Article</>}</button>
+                {articleId ? <>Save Article</> : <>Update Article</>}</button>
         </form >
     )
 

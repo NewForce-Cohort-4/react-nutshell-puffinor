@@ -15,7 +15,7 @@ export default class ApplicationViews extends Component {
       <React.Fragment>
 
         <ArticleProvider>
-          <Route  path ="/articles">
+          <Route exact path ="/articles">
             <ArticleList />
           </Route>
         </ArticleProvider>
