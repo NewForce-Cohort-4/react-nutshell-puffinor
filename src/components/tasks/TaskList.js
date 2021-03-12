@@ -13,7 +13,7 @@ export const TasksList = () => {
     functions that a parent provider component exposes.
 
   */
-  const { getTasks, tasks } = useContext(TaskContext)
+  const { getTasks, tasks, updateTask } = useContext(TaskContext)
   
   /*
     useEffect() allows for getting the data from somewhere else.
@@ -46,11 +46,13 @@ export const TasksList = () => {
       <>
       <h2>Tasks</h2>
       
-      <TaskForm />
+      <TaskForm changeparentstate={setDisplayForm} />
             
       <div className="tasks-container">
         {
-          tasks.map(task => {
+          tasks.filter(task => {
+            return !task.completed
+          }).map(task => {
             return <TaskItem key={task.id} task={task} />
           })
         }
@@ -64,7 +66,9 @@ export const TasksList = () => {
       
       <div className="tasks-container">
         {
-          tasks.map(task => {
+          tasks.filter(task => {
+            return !task.completed
+          }).map(task => {
             return <TaskItem key={task.id} task={task} />
           })
         }
@@ -74,25 +78,35 @@ export const TasksList = () => {
 }
 
 /*
-  Function to print a task in the list. To change the appearance and function
+  Function to print a task in the list and mark tasks completed if checked. To change the appearance and function
   of the tasks edit the HTML here as needed. 
 */
-const TaskItem = ({ task }) => (
+const TaskItem = ({ task }) => {
+  const {updateTask, getTasks} = useContext(TaskContext)
+  
+  const handleCheckBox = (idOfCurrentTask) => {
+    console.log("Checked box")
+    updateTask(idOfCurrentTask)
+    .then(getTasks)
+  }
+
+  return(
   <section className="task">
     <p className="task__name">{task.task}</p>
     <p className="task__date">{task.date}</p>
     <div className = "checkbox">
-      <p>Completed?<input type="checkbox" className="checkboxflag" id={task.id}></input></p>
+      <p>Completed?<input type="checkbox" className="checkboxflag" id={task.id} onClick={()=>handleCheckBox(task.id)}></input></p>
     </div>
   </section>
-)
+  )
+}
 
 /*
   Function to add a task.
 */
-const TaskForm = () => {
+const TaskForm = ({changeparentstate}) => {
   console.log("You clicked the button");
-  const { addTask } = useContext(TaskContext);
+  const { addTask, getTasks } = useContext(TaskContext);
   /*
   With React, we do not target the DOM with `document.querySelector()`. Instead, our return (render) reacts to state or props.
 
@@ -101,6 +115,7 @@ const TaskForm = () => {
   const [task, setTask] = useState({
     task: "",
     date: "",
+    completed: false,
     userId: localStorage.getItem("nutshell_user"),
   });
 
@@ -115,18 +130,20 @@ const TaskForm = () => {
     setTask(newTask);
   };
 
-  const handleClickSaveMessageTask = (event) => {
-    event.preventDefault();
+  const handleClickSaveTask = () => {
+    console.log("You clickd save")
     const newTask = { ...task };
 
-    addTask(newTask).then(() => history.push("/tasks"));
+    addTask(newTask)
+    .then(getTasks)
+    .then(() => changeparentstate(false))
   };
 
   return (
     <fieldset>
-    <input type="date" id = "date"></input>
-    <input type="text" placeholder="Enter task here" id="task"></input>
-    <button id="saveTask">Save Task</button>
+    <input type="date" id = "date" onChange={handleControlledInputChange}/>
+    <input type="text" placeholder="Enter task here" id="task" onChange={handleControlledInputChange}/>
+    <button id="saveTask" onClick={() => handleClickSaveTask()}>Save Task</button>
     </fieldset>
   );
 };
