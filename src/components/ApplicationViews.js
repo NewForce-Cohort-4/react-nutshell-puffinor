@@ -32,6 +32,7 @@ export default class ApplicationViews extends Component {
                 </Route>
         </MessageProvider>
 
+        <TaskProvider>
         <Route
           path="/tasks" render={props => {
             return <TaskList />
