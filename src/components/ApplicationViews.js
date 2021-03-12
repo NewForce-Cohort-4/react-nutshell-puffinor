@@ -1,5 +1,8 @@
 import { Route } from "react-router-dom";
 import React, { Component } from "react";
+import { ArticleProvider } from "./articles/ArticlesProvider"
+import { ArticleList } from "./articles/ArticleList"
+import { ArticleForm } from "./articles/ArticlesForm"
 
 import { MessageProvider } from "./messages/MessageProvider"
 import { MessageList } from "./messages/MessageList"
@@ -11,12 +14,13 @@ export default class ApplicationViews extends Component {
     return (
       <React.Fragment>
 
-        <Route
-          exact path="/" render={props => {
-            return null
-            // Remove null and return the component which will show news articles
-          }}
-        />
+        <ArticleProvider>
+          <Route exact path ="/articles">
+            <ArticleList />
+          </Route>
+        </ArticleProvider>
+        {/* // Remove null and return the component which will show news articles */}
+
         <Route
           path="/friends" render={props => {
             return null
