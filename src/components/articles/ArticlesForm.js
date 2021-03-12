@@ -83,9 +83,7 @@ export const ArticleForm = ({setShowForm}) => {
                         defaultValue={article.url} />
                 </div>
             </fieldset>
-            <button className="btn btn-primary"
-                // disabled={isLoading}
-                onClick={event => {
+            <button className="btn btn-primary"                onClick={event => {
                     event.preventDefault()
                     handleSaveArticle()
                 }}>

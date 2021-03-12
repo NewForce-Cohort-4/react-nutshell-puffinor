@@ -39,13 +39,13 @@ export const ArticleProvider = (props) => {
     }
     
     //updating an article 
-    const updateArticle = (article) => {
-        return fetch(`http://localhost:8088/articles/${article.id}`, {
+    const updateArticle = (articleId) => {
+        return fetch(`http://localhost:8088/articles/${articleId}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(article)
+            body: JSON.stringify(articleId)
         })
         .then(getArticles)
     }
