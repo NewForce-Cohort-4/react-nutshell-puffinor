@@ -1,7 +1,7 @@
 import { Route } from "react-router-dom";
 import React, { Component } from "react";
 import { TaskProvider } from "./tasks/TaskDataProvider"
-import { TaskList } from "./tasks/TaskList"
+import { TasksList } from "./tasks/TaskList"
 
 import { MessageProvider } from "./messages/MessageProvider"
 import { MessageList } from "./messages/MessageList"
@@ -35,7 +35,7 @@ export default class ApplicationViews extends Component {
         <TaskProvider>
         <Route
           path="/tasks" render={props => {
-            return <TaskList />
+            return <TasksList />
           }}
         />
         </TaskProvider>
