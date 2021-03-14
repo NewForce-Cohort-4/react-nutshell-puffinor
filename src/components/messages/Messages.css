@@ -3,6 +3,7 @@
 .messages-container{
     height: 80vh;
     overflow: auto;
+    
      
 }
 
@@ -15,4 +16,9 @@
 
 .container-card{
     width:100vw;
+}
+
+.edit-group{
+    width:958px;
+
 }
