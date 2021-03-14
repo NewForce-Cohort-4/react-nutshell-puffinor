@@ -28,7 +28,7 @@ export const MessageList = () => {
       const edit = {...editedMessage}
       edit[event.target.id]= event.target.value
       setEditedMessage(edit)
-      console.log(editedMessage.editor)
+      console.log(editedMessage.message)
     }
   
     const handleMessageInputControlledChanges = (event) => {
@@ -61,6 +61,7 @@ export const MessageList = () => {
     //a messaages edit button is clicked 
     const handleClickEditMessage = (id) =>{
       setEditId(id)
+      editedMessage.value = 'plwAS';
       
     }
     const handleClickCancelEdit = () =>{
@@ -98,11 +99,12 @@ export const MessageList = () => {
                       //if editId, which is in state and set originally to 0, now matches that of a fetch calls message.id
                       //bring up the text edit form referenced by editTextAreaId.
                     messagesFromProvider.map(messageInLoop => {
+                      console.log(messageInLoop.userId, localStorage.getItem('nutshell_user'));
                       return  (editId===messageInLoop.id)
                       //if 
                       ?   <Container fluid >
                         <div className="edit-group ">
-                      <textarea type="text" id="message"  required autoFocus className="edit-form-control" onChange={handleEdits} defaultValue = {message.message} /> 
+                      <textarea type="text" id="message"  required autoFocus className="edit-form-control" onChange={handleEdits} defaultValue = {messageInLoop.message} /> 
                           <button 
                               onClick={event => {event.preventDefault()
                                 handleClickSaveChanges(messageInLoop.id)
@@ -123,6 +125,8 @@ export const MessageList = () => {
                       :  <MessageCard key={messageInLoop.id}
                             message= {messageInLoop}
                             userName= {messageInLoop.user.name}
+                            userId={messageInLoop.userId}
+                            currentUser={localStorage.getItem('nutshell_user')}
                             changeParentState= {()=>handleClickEditMessage(messageInLoop.id)} />
                   })
                     }
