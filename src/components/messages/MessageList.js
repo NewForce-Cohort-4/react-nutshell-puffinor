@@ -61,7 +61,7 @@ export const MessageList = () => {
     //a messaages edit button is clicked 
     const handleClickEditMessage = (id) =>{
       setEditId(id)
-      editedMessage.value = 'plwAS';
+      
       
     }
     const handleClickCancelEdit = () =>{
