@@ -1,11 +1,18 @@
+*{
+    margin:0;
+    padding:0;
+}
 
-
+.messages-div{
+    width: 3000px;
+}
 .messages-container{
     height: 80vh;
     overflow: auto;
-    
-     
+    width: 3000px;
+
 }
+
 
 .input-group{
     position: absolute;
@@ -15,10 +22,11 @@
 }
 
 .container-card{
-    width:100vw;
+    width:3000rem;
+    margin:10px;
 }
 
 .edit-group{
-    width:958px;
+    width:3000px;
 
 }

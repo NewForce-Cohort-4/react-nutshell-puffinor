@@ -102,9 +102,9 @@ export const MessageList = () => {
                       console.log(messageInLoop.userId, localStorage.getItem('nutshell_user'));
                       return  (editId===messageInLoop.id)
                       //if 
-                      ?   <Container fluid >
+                  ?   <Container fluid >
                         <div className="edit-group ">
-                      <textarea type="text" id="message"  required autoFocus className="edit-form-control" onChange={handleEdits} defaultValue = {messageInLoop.message} /> 
+                        <textarea type="text" id="message"  required autoFocus className="edit-form-control" onChange={handleEdits} defaultValue = {messageInLoop.message} /> 
                           <button 
                               onClick={event => {event.preventDefault()
                                 handleClickSaveChanges(messageInLoop.id)
@@ -117,8 +117,8 @@ export const MessageList = () => {
                               }}>
                               Cancel
                           </button>
-                      </div>
-                  </Container> 
+                        </div>
+                      </Container> 
 
 
                           // if the editId, which is in State which we originally set equal to 0, is still 0 (doesnt match any messages'id), then send these to the messageCard component. message is the message, user name, changeParentState is an anonymous function. Send it to componenet card because that is where its childEvent (button is). Send the function there, to be available if clicked. Carefull not to create infinite loop, mnust be anon fx
