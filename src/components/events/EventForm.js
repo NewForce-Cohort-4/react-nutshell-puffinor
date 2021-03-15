@@ -54,10 +54,10 @@ export const EventForm = ({setShowForm}) => {
 
     return (
         <form className="eventForm">
-            <h2 className="eventForm__title">New Article</h2>
+            <h2 className="eventForm__title">New Event</h2>
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="eventName">Article title</label>
+                    <label htmlFor="eventName">Event Title</label>
                     <input type="text" id="name" name="name" required autoFocus className="form-control"
                         placeholder="Event Title"
                         onChange={handleControlledInputChange}
@@ -75,7 +75,7 @@ export const EventForm = ({setShowForm}) => {
             </fieldset>
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="date">Location</label>
+                    <label htmlFor="date">Date</label>
                     <input type="date" id="date" name="date" required autoFocus className="form-control"
                          
                         onChange={handleControlledInputChange}
@@ -90,7 +90,7 @@ export const EventForm = ({setShowForm}) => {
                     handleSaveEvent()
                 }}>
                 {/* {EventId ? <>Save Event</> :  */}
-                <>Update Event</></button>
+                <>Save Event</></button>
         </form >
     )
 
