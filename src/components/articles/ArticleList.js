@@ -9,6 +9,7 @@ export const ArticleList = () => {
     const { article, getArticles, deleteArticle, updateArticle } = useContext(ArticleContext)
     let [showForm, setShowForm] = useState(false)
     const [filteredArticles, setFiltered] = useState([])
+        const [editCurrentArticle, setEdit] = useState(0)
 
 // listening function when New Article button is clicked to make it appear
     const handleClick = () => {
@@ -40,8 +41,14 @@ export const ArticleList = () => {
 
     //Function for edit
     const handleEdit = (articleId) => {
+        console.log(articleId)
         return () => updateArticle(articleId).then(() =>
         history.push("/articles"))
+    }
+
+    const handleEditClick = (id) => {
+        const editArticle = editCurrentArticle
+        setEdit(id)
     }
 
 
@@ -64,8 +71,8 @@ export const ArticleList = () => {
                     <ArticleCard
                     key={article.id}
                     article={article}
-                    deleteArticle={handleDelete(article.id)}
-                    editArticle={handleEdit(article.id)}
+                    deleteArticle={() => handleDelete(article.id)}
+                    editArticle={() => handleEdit(article.id)}
                     />)
             })}
         </div>

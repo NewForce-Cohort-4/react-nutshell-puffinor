@@ -3,13 +3,7 @@ import { ArticleForm } from "./ArticlesForm"
 import "./Article.css"
 
 // How article is being printed to the DOM 
-export function ArticleCard({ article, deleteArticle }) {
-    const [editCurrentArticle, setEdit] = useState(0)
-
-    const handleEditClick = (id) => {
-        const newEdit = editCurrentArticle
-        setEdit(id)
-    }
+export function ArticleCard({ article, deleteArticle, editArticle }) {
     
     return (
         <section className="article">
@@ -17,9 +11,7 @@ export function ArticleCard({ article, deleteArticle }) {
             <div className="article__synopsis">Synopsis: {article.synopsis}</div>
             <p>Date: {new Date(article.time).toLocaleDateString('en-US')}</p>
             <button onClick={deleteArticle}>Delete</button>
-            <button onClick={() => handleEditClick()}>
-                Edit
-                </button>
+            <button onClick={editArticle}>Edit</button>
         </section>
     )
 }
