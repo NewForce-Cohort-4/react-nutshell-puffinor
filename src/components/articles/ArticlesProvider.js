@@ -25,8 +25,8 @@ export const ArticleProvider = (props) => {
     }
 
     // delete an article
-    const deleteArticle = articleId => {
-        return fetch(`http://localhost:8088/articles/${articleId}`, {
+    const deleteArticle = articleObject => {
+        return fetch(`http://localhost:8088/articles/${articleObject.id}`, {
             method: "DELETE"
         })
         .then(getArticles)
@@ -39,13 +39,13 @@ export const ArticleProvider = (props) => {
     }
     
     //updating an article 
-    const updateArticle = (articleId) => {
-        return fetch(`http://localhost:8088/articles/${articleId}`, {
+    const updateArticle = (articleObject) => {
+        return fetch(`http://localhost:8088/articles/${articleObject.id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(articleId)
+            body: JSON.stringify(articleObject)
         })
         .then(getArticles)
     }
