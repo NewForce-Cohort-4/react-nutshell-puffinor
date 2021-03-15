@@ -39,10 +39,11 @@ export const ArticleList = () => {
     }
 
     //Function for edit
-    // const handleEdit = (articleId) => {
-    //     return () => updateArticle(articleId).then(() =>
-    //     history.push("/articles"))
-    // }
+    const handleEdit = (articleId) => {
+        return () => updateArticle(articleId).then(() =>
+        history.push("/articles"))
+    }
+
 
     return (
         <>
@@ -64,7 +65,7 @@ export const ArticleList = () => {
                     key={article.id}
                     article={article}
                     deleteArticle={handleDelete(article.id)}
-                    // editArticle={handleEdit(article.id)}
+                    editArticle={handleEdit(article.id)}
                     />)
             })}
         </div>
