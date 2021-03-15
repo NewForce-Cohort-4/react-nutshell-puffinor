@@ -43,7 +43,7 @@ export const MessageList = () => {
   
   
 
-  const handleClickSaveMessage = (event) => {
+  const handleClickSaveMessage = () => {
     
       addMessage({
         message:message.message,
