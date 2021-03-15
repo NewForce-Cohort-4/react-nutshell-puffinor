@@ -7,7 +7,7 @@ export const MessageContext = createContext()
 // This component establishes what data can be used.This function is called on the appviews file whenver the route is /animals
 export const MessageProvider = (props) => {
     //statefunction
-    const [messages, setMessages] = useState([])
+    const [messagesFromProvider, setMessages] = useState([])
     //new magic state. tracking searchTerms, set to empty string right now. We need to export setSearchTerms below. We generally have not exported setters, setAnimals for instance, becuase it is called everytime we use getAnimals
     
 
@@ -43,7 +43,8 @@ export const MessageProvider = (props) => {
     // }
 
     const updateMessage = messageObject => {
-        return fetch(`http://localhost:8088/messages/${messages.id}`, {
+        console.log(messageObject);
+        return fetch(`http://localhost:8088/messages/${messageObject.id}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json"
@@ -61,7 +62,7 @@ export const MessageProvider = (props) => {
     */
     return (
         <MessageContext.Provider value={{
-            messages, getMessages, addMessage, updateMessage, 
+            messagesFromProvider, getMessages, addMessage, updateMessage, 
         }}>
             {props.children}
         </MessageContext.Provider>
