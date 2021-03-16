@@ -3,17 +3,11 @@ import { ArticleContext } from './ArticlesProvider'
 import { useParams, useHistory } from "react-router-dom"
 import "./Article.css"
 
-export const ArticleForm = ({setShowForm}) => {
+export const ArticleForm = ({ setShowForm, editCurrentArticle }) => {
     const { addArticle, updateArticle, getArticles } = useContext(ArticleContext)
 
     //Info for a new article
-    const [article, setArticles] = useState({
-        title: "",
-        synopsis: "",
-        url: "",
-        time: parseInt(Date.now()),
-        userId: localStorage.getItem("nutshell_user")
-    })
+    const [article, setArticles] = useState(editCurrentArticle)
     const [isLoading, setIsLoading] = useState(true)
 
     const { articleId } = useParams()
@@ -26,11 +20,11 @@ export const ArticleForm = ({setShowForm}) => {
         newArticle[event.target.name] = event.target.value
         setArticles(newArticle)
     }
-// fucntion when you hit save / update an article 
+    // fucntion when you hit save / update an article 
     const handleSaveArticle = () => {
         let currentUser = localStorage.getItem("nutshell_user")
         setIsLoading(true);
-        if (articleId) {
+        if (editCurrentArticle.id) {
             //update a current article 
             updateArticle({
                 id: article.id,
@@ -41,7 +35,8 @@ export const ArticleForm = ({setShowForm}) => {
                 userId: currentUser
             })
                 .then(() => {
-                getArticles()
+                    setShowForm()
+                    getArticles()
                 })
         } else {
             // create a new article 
@@ -49,7 +44,7 @@ export const ArticleForm = ({setShowForm}) => {
                 .then(() => {
                     setShowForm()
                     getArticles()
-            })   
+                })
         }
     }
 
@@ -83,13 +78,11 @@ export const ArticleForm = ({setShowForm}) => {
                         defaultValue={article.url} />
                 </div>
             </fieldset>
-            <button className="btn btn-primary"
-                // disabled={isLoading}
-                onClick={event => {
-                    event.preventDefault()
-                    handleSaveArticle()
-                }}>
-                {articleId ? <>Save Article</> : <>Update Article</>}</button>
+            <button className="btn btn-primary" onClick={event => {
+                event.preventDefault()
+                handleSaveArticle()
+            }}>
+                {!article.id ? <>Save Article</> : <>Update Article</>}</button>
         </form >
     )
 

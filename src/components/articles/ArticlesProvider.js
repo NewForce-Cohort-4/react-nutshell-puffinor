@@ -25,27 +25,27 @@ export const ArticleProvider = (props) => {
     }
 
     // delete an article
-    const deleteArticle = articleId => {
-        return fetch(`http://localhost:8088/articles/${articleId}`, {
+    const deleteArticle = articleObject => {
+        return fetch(`http://localhost:8088/articles/${articleObject.id}`, {
             method: "DELETE"
         })
         .then(getArticles)
     }
 
     //grouping articles by Ids
-    const getArticleById = (id) => {
-        return fetch(`http://localhost:8088/articles/${id}?_expand=user`)
+    const getArticleById = (articleObject) => { 
+        return fetch(`http://localhost:8088/articles/${articleObject}`)
         .then(res => res.json())
     }
     
     //updating an article 
-    const updateArticle = (article) => {
-        return fetch(`http://localhost:8088/articles/${article.id}`, {
+    const updateArticle = (articleObject) => {
+        return fetch(`http://localhost:8088/articles/${articleObject.id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(article)
+            body: JSON.stringify(articleObject)
         })
         .then(getArticles)
     }
