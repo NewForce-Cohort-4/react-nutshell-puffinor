@@ -33,8 +33,8 @@ export const ArticleProvider = (props) => {
     }
 
     //grouping articles by Ids
-    const getArticleById = (id) => {
-        return fetch(`http://localhost:8088/articles/${id}?_expand=user`)
+    const getArticleById = (articleObject) => { 
+        return fetch(`http://localhost:8088/articles/${articleObject}`)
         .then(res => res.json())
     }
     

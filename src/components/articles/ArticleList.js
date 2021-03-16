@@ -10,6 +10,7 @@ export const ArticleList = () => {
     let [showForm, setShowForm] = useState(false)
     const [filteredArticles, setFiltered] = useState([])
     const [editCurrentArticle, setEdit] = useState({
+        id: 0,
         title: "",
         synopsis: "",
         url: "",

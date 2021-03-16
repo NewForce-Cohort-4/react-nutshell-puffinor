@@ -24,7 +24,7 @@ export const ArticleForm = ({ setShowForm, editCurrentArticle }) => {
     const handleSaveArticle = () => {
         let currentUser = localStorage.getItem("nutshell_user")
         setIsLoading(true);
-        if (editCurrentArticle) {
+        if (editCurrentArticle.id) {
             //update a current article 
             updateArticle({
                 id: article.id,
@@ -82,7 +82,7 @@ export const ArticleForm = ({ setShowForm, editCurrentArticle }) => {
                 event.preventDefault()
                 handleSaveArticle()
             }}>
-                {articleId ? <>Save Article</> : <>Update Article</>}</button>
+                {!article.id ? <>Save Article</> : <>Update Article</>}</button>
         </form >
     )
 
