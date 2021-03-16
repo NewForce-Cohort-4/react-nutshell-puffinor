@@ -50,6 +50,17 @@ export const TaskProvider = (props) => {
     })
     .then(res=>res.json())
   }
+
+  const editTask = (task) => {
+    return fetch(`http://localhost:8088/tasks/${task.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(task)
+    })
+      .then(getTasks)
+  }
   
   /*
     React components return something, here we return context provider containing the 
@@ -57,7 +68,7 @@ export const TaskProvider = (props) => {
     component will expose to other components.
   */
   return (
-    <TaskContext.Provider value={{ tasks, getTasks, addTask, updateTask }}>
+    <TaskContext.Provider value={{ tasks, getTasks, addTask, updateTask, editTask }}>
       {props.children}
     </TaskContext.Provider>
   )
