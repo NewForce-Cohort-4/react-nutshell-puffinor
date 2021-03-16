@@ -9,6 +9,9 @@ import { ArticleForm } from "./articles/ArticlesForm"
 import { MessageProvider } from "./messages/MessageProvider"
 import { MessageList } from "./messages/MessageList"
 
+import { EventProvider } from "./events/EventProvider"
+import { EventList } from "./events/EventList"
+
 
 export default class ApplicationViews extends Component {
 
@@ -44,12 +47,14 @@ export default class ApplicationViews extends Component {
         />
         </TaskProvider>
 
-        <Route
-          path="/events" render={props => {
-            return null
-            // Remove null and return the component which will show the user's events
-          }}
-        />
+        <EventProvider>
+          <Route exact path="/events">
+            <EventList />
+          </Route>
+
+
+        </EventProvider>
+        
 
       </React.Fragment>
     );
